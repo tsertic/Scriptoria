@@ -3,7 +3,6 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import React, { Suspense } from "react";
 import Client from "./Client";
 import { QUERY_KEYS } from "@/utils/query-constants";
-import { error } from "console";
 
 interface PageProps {
   searchParams?: { text?: string };
@@ -15,7 +14,7 @@ const page = async ({ searchParams }: PageProps) => {
 
   try {
     void queryClient.prefetchQuery(trpc.hello.queryOptions(queryParams));
-  } catch {
+  } catch (error) {
     console.error("Prefetched failed: ", error);
   }
 
